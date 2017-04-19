@@ -28,7 +28,7 @@ Coefficients:
 (Intercept)  -1274916    5368703  -0.237    0.814    
 Temp        126379778   10724953  11.784 1.49e-13 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 11710000 on 34 degrees of freedom
 Multiple R-squared:  0.8033,    Adjusted R-squared:  0.7975 
@@ -49,7 +49,7 @@ Coefficients:
 (Intercept)  16.6553     0.1100  151.47  < 2e-16 ***
 Temp          2.3650     0.2197   10.77  1.7e-12 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.2399 on 34 degrees of freedom
 Multiple R-squared:  0.7732,    Adjusted R-squared:  0.7665 
@@ -70,7 +70,7 @@ Coefficients:
 (Intercept) 98433555    5027652  19.578  < 2e-16 ***
 log(Temp)   47721420    5195631   9.185 9.82e-11 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 14160000 on 34 degrees of freedom
 Multiple R-squared:  0.7127,    Adjusted R-squared:  0.7043 
@@ -91,7 +91,7 @@ Coefficients:
 (Intercept) 18.54211    0.09398 197.306  < 2e-16 ***
 log(Temp)    0.91750    0.09712   9.447  4.9e-11 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.2646 on 34 degrees of freedom
 Multiple R-squared:  0.7241,    Adjusted R-squared:  0.716 
@@ -184,7 +184,7 @@ Coefficients:
 Temp        1.297e-03  1.771e-03   0.732    0.469    
 Year        2.594e-04  3.104e-05   8.355 1.19e-09 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.0008474 on 33 degrees of freedom
 Multiple R-squared:  0.9278,    Adjusted R-squared:  0.9234 
@@ -230,7 +230,7 @@ Coefficients:
 Temp        1.297e-03  1.771e-03   0.732    0.469    
 Year        2.594e-04  3.104e-05   8.355 1.19e-09 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.0008474 on 33 degrees of freedom
 Multiple R-squared:  0.9278,    Adjusted R-squared:  0.9234 
@@ -252,7 +252,7 @@ Coefficients:
 Temp        11912814   11256463   1.058    0.298    
 Year         2231327     197266  11.311 6.78e-13 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 5384000 on 33 degrees of freedom
 Multiple R-squared:  0.9597,    Adjusted R-squared:  0.9572 
@@ -275,7 +275,7 @@ Coefficients:
 (Intercept) -67653587   10857717  -6.231 4.33e-07 ***
 exp(Temp)    77314611    6589113  11.734 1.67e-13 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 11760000 on 34 degrees of freedom
 Multiple R-squared:  0.802,     Adjusted R-squared:  0.7961 
@@ -295,7 +295,7 @@ Coefficients:
 (Intercept)  16.6553     0.1100  151.47  < 2e-16 ***
 Temp          2.3650     0.2197   10.77  1.7e-12 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.2399 on 34 degrees of freedom
 Multiple R-squared:  0.7732,    Adjusted R-squared:  0.7665 
@@ -353,7 +353,7 @@ Coefficients:
 Visitors1    9.183e-01  4.868e-02  18.865   <2e-16 ***
 Temp1        7.967e+06  6.768e+06   1.177    0.248    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 3267000 on 32 degrees of freedom
   (1 observation deleted due to missingness)
@@ -379,7 +379,7 @@ Visitors2   -2.790e-01  1.747e-01  -1.597   0.1212
 Temp1        1.520e+07  7.365e+06   2.064   0.0481 *  
 Temp2        5.418e+05  6.840e+06   0.079   0.9374    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 3145000 on 29 degrees of freedom
   (2 observations deleted due to missingness)
@@ -436,7 +436,7 @@ Coefficients:
 (Intercept)  44833318    1009377   44.42   <2e-16 ***
 S.Level     944153774   33780330   27.95   <2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 5395000 on 34 degrees of freedom
 Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9571 
@@ -479,7 +479,7 @@ Coefficients:
 (Intercept) -585155612  322379864  -1.815   0.0783 .
 Fl.Temp        9055815    4541248   1.994   0.0542 .
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 24990000 on 34 degrees of freedom
 Multiple R-squared:  0.1047,    Adjusted R-squared:  0.07838 
@@ -502,7 +502,7 @@ Coefficients:
 Fl.Temp       -90424    1055097  -0.086    0.932    
 Year         2421675      93164  25.994   <2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 5474000 on 33 degrees of freedom
 Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9558 
@@ -524,7 +524,7 @@ Coefficients:
 (Intercept)  -1274916    5368703  -0.237    0.814    
 Temp        126379778   10724953  11.784 1.49e-13 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 11710000 on 34 degrees of freedom
 Multiple R-squared:  0.8033,    Adjusted R-squared:  0.7975 
@@ -547,7 +547,7 @@ Coefficients:
 S.Level     945176141   36365847  25.991   <2e-16 ***
 Fl.Temp        -88966    1055195  -0.084    0.933    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 5475000 on 33 degrees of freedom
 Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9558 
@@ -570,7 +570,7 @@ Coefficients:
 S.Level     870526698   76953040  11.312 6.76e-13 ***
 Temp         11974612   11250440   1.064    0.295    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 5384000 on 33 degrees of freedom
 Multiple R-squared:  0.9597,    Adjusted R-squared:  0.9572 
@@ -598,7 +598,7 @@ Coefficients:
 (Intercept)  5.190e+07  5.255e+06   9.877  1.6e-11 ***
 exp(Fl.Temp) 5.386e-25  2.956e-25   1.822   0.0772 .  
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 25210000 on 34 degrees of freedom
 Multiple R-squared:  0.08898,   Adjusted R-squared:  0.06218 
@@ -644,7 +644,7 @@ Coefficients:
 Visitors1   7.996e-01  1.030e-01   7.764 7.46e-09 ***
 S.Level1    1.693e+08  1.004e+08   1.686    0.102    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 3198000 on 32 degrees of freedom
   (1 observation deleted due to missingness)
@@ -670,7 +670,7 @@ Visitors2   -2.526e-01  1.742e-01  -1.450    0.158
 S.Level1    -4.194e+08  5.467e+09  -0.077    0.939    
 S.Level2     6.229e+08  5.469e+09   0.114    0.910    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 3184000 on 29 degrees of freedom
   (2 observations deleted due to missingness)
@@ -709,7 +709,7 @@ Coefficients:
 Temp        -0.005054   0.220522  -0.023    0.982    
 Year         0.046200   0.003865  11.955 1.55e-13 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.1055 on 33 degrees of freedom
 Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9549 
@@ -739,7 +739,7 @@ Coefficients:
 (Intercept) 17.51364    0.01945  900.47   <2e-16 ***
 S.Level     18.00102    0.65091   27.66   <2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.1039 on 34 degrees of freedom
 Multiple R-squared:  0.9574,    Adjusted R-squared:  0.9562 
@@ -759,7 +759,7 @@ Coefficients:
 (Intercept)  153374560    7404220   20.71 1.86e-15 ***
 log(S.Level)  21521307    1924138   11.19 2.63e-10 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 7778000 on 21 degrees of freedom
   (13 observations deleted due to missingness)
@@ -780,7 +780,7 @@ Coefficients:
 (Intercept)  19.32758    0.10126  190.88  < 2e-16 ***
 log(S.Level)  0.33822    0.02631   12.85 2.03e-11 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.1064 on 21 degrees of freedom
   (13 observations deleted due to missingness)
@@ -824,7 +824,7 @@ Coefficients:
 (Intercept) 0.0024333  0.0006806   3.575  0.00107 ** 
 PCT         1.0524372  0.0968344  10.868 1.33e-12 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.001469 on 34 degrees of freedom
 Multiple R-squared:  0.7765,    Adjusted R-squared:  0.7699 
@@ -849,7 +849,7 @@ Coefficients:
 PCT         9.521e-02  1.279e-01   0.744    0.462    
 Year        2.590e-04  3.112e-05   8.321 1.30e-09 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
 
 Residual standard error: 0.0008471 on 33 degrees of freedom
 Multiple R-squared:  0.9279,    Adjusted R-squared:  0.9235 
