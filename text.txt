@@ -1,0 +1,861 @@
+> # My data on visitors comes from The Bureau of Economic and Business
+> # Research. My data on Temp Anomalies comes from the National
+> # Climate Data Center, which is run by NOAA.
+> 
+> # When it comes to naming I have chosen to designate ever data.frame by
+> # joining the first letter of their relevent data sets with the letter n
+> # i.e. tnv is read T and V for Temp and Visitors
+> # Regressions are denoted similarly but with an x
+> # i.e. vxt is V by T for Visitors regressed on Temp
+> # i.e. vxlt is V by log(T) for Visitors regreesed on log(Temp)
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp <-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> tnv <-merge(temp, visitors, by="Year")
+> vxt <-lm(Visitors ~ Temp, data=tnv)
+> summary(vxt)
+
+Call:
+lm(formula = Visitors ~ Temp, data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-29910741  -9695709   1723416   7835171  20262407 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -1274916    5368703  -0.237    0.814    
+Temp        126379778   10724953  11.784 1.49e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 11710000 on 34 degrees of freedom
+Multiple R-squared:  0.8033,    Adjusted R-squared:  0.7975 
+F-statistic: 138.9 on 1 and 34 DF,  p-value: 1.487e-13
+
+> lvxt <-lm(log(Visitors) ~ Temp, data=tnv)
+> summary(lvxt)
+
+Call:
+lm(formula = log(Visitors) ~ Temp, data = tnv)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.49943 -0.14108  0.04471  0.17124  0.44090 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  16.6553     0.1100  151.47  < 2e-16 ***
+Temp          2.3650     0.2197   10.77  1.7e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2399 on 34 degrees of freedom
+Multiple R-squared:  0.7732,    Adjusted R-squared:  0.7665 
+F-statistic: 115.9 on 1 and 34 DF,  p-value: 1.702e-12
+
+> vxlt <-lm(Visitors ~ log(Temp), data=tnv)
+> summary(vxlt)
+
+Call:
+lm(formula = Visitors ~ log(Temp), data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-27844374 -14992374   1602581  10395079  25836894 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 98433555    5027652  19.578  < 2e-16 ***
+log(Temp)   47721420    5195631   9.185 9.82e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 14160000 on 34 degrees of freedom
+Multiple R-squared:  0.7127,    Adjusted R-squared:  0.7043 
+F-statistic: 84.36 on 1 and 34 DF,  p-value: 9.824e-11
+
+> lvxlt <-lm(log(Visitors) ~ log(Temp), data=tnv)
+> summary(lvxlt)
+
+Call:
+lm(formula = log(Visitors) ~ log(Temp), data = tnv)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.5806 -0.2225  0.0745  0.1534  0.4701 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 18.54211    0.09398 197.306  < 2e-16 ***
+log(Temp)    0.91750    0.09712   9.447  4.9e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2646 on 34 degrees of freedom
+Multiple R-squared:  0.7241,    Adjusted R-squared:  0.716 
+F-statistic: 89.26 on 1 and 34 DF,  p-value: 4.899e-11
+
+> #What I have found is that the basic level-level model best describes the 
+> #relationship between Temp and Visitors
+> with(tnv, plot(Temp, Visitors,
++                ylab="Florida Tourism",
++                xlab="Temperature",
++                main="Effects of Climate Change on Tourism"
++ ))
+> x11()
+> with(tnv, hist(Temp))
+> x11()
+> with(tnv, hist(Visitors))
+> #A few notes on what I've done and what I want to do
+> #1. I have evaluated all the different variable manipulations to see which 
+> #   best fits the relationship
+> #2. I would like to use the log-level model as it better handles the larger
+> #   values in Visitors, but it doesnt describe the relationship as well as
+> #   the level-level model. I think I'll stick to that one for interpretaional 
+> #   simplicity
+> #3. I have come to realize that both temperature and visitors can be driven by
+> #   population growth. I would like to find population growth data and 
+> #   run regressions to determine their effects on my variables, as well as
+> #   learn more about time-series regression.
+> #4. It strikes me that an easy way to filter out the effects of population
+> #   growth on tourism is to use a ratio of visitors to world population. 
+> #   I should look into that
+> 
+> # CONCLUSION: use the level-level VxT, though LVxT is a good second
+> # This script is to test the relationship between population growth 
+> # and my variables
+> setwd("D:/Files/R Directory/Project")
+> temp<-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> Pop<-read.csv("world.csv")
+> pnt<-merge(Pop, temp, by="Year")
+> pnv<-merge(Pop, visitors, by="Year")
+> txp<-lm(Temp ~ Pop, data=pnt)
+> vxp<-lm(Visitors ~ Pop, data=pnv)
+> lvxp<-lm(log(Visitors) ~ Pop, data=pnv)
+> ltxp<-lm(log(Temp) ~ Pop, data=pnt)
+> summary(txp)$r.squared
+[1] 0.8061601
+> summary(ltxp)$r.squared
+[1] 0.738635
+> summary(vxp)$r.squared
+[1] 0.9523966
+> summary(lvxp)$r.squared
+[1] 0.9583309
+> x11()
+> with(pnv, plot(Pop, log(Visitors), main="World Pop Drives Florida Tourism"))
+> # Tourism and World Population have a very strong relationship, 
+> # and the percent change in World Population does a good job predicting change
+> # in Temperature
+> vrate<-read.csv("vrate.csv")
+> rnt<-merge(vrate, temp, by="Year")
+> rxt<-lm(Visit.Rate ~ Temp, data=rnt)
+> summary(rxt)$r.squared
+[1] 0.7751117
+> x11()
+> with(rnt, plot(Temp, Visit.Rate, 
++                ylab="Percent of World Population who visit Florida",
++                xlab="Average Global Deviation from a refference temperature",
++                main="Effects of Climate Change on Tourism"
++ ))
+> # The last data set I created myself. I took Florida Tourism and divided
+> # it by world population for every year. This controls for the fact that
+> # world population growth is a general driver of tourism growth
+> # Now to take care of the time trend bias
+> rnt$Year<-(rnt$Year-1979)
+> time.rxt<-lm(Visit.Rate ~ Temp + Year, data=rnt)
+> summary(time.rxt)$r.squared
+[1] 0.9278144
+> # This is a model I can work with
+> summary(time.rxt)
+
+Call:
+lm(formula = Visit.Rate ~ Temp + Year, data = rnt)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-1.526e-03 -5.150e-04  3.369e-05  4.398e-04  1.951e-03 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 3.932e-03  4.232e-04   9.291 9.87e-11 ***
+Temp        1.297e-03  1.771e-03   0.732    0.469    
+Year        2.594e-04  3.104e-05   8.355 1.19e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0008474 on 33 degrees of freedom
+Multiple R-squared:  0.9278,    Adjusted R-squared:  0.9234 
+F-statistic: 212.1 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> 
+> # CONLCUSION: World Population Growth has a strong relationship with
+> #             Tourism, created new data set to remove this effect
+> # And here is where I realize that by including a time trend, my p-value for 
+> # Temp has skyrocketed and I am better off leaving it out of my model. This,
+> # obviously, is counterproductive to my investigation so I am looking into
+> # alternative methods of improving my model
+> 
+> # It is worth noting that Grdic and Nizic used an exponential model without
+> # a time trend to predict number of tourists based off air temperature
+> # in Croatia. The following analysis follows their example.
+> 
+> # At this point I have largely decided that using Visit.Rate with a time trend
+> # term is redundant. I'm looking for a reason to keep using it, if I don't 
+> # find one, I'm switching back to Visitors. 
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp<-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> vrate<-read.csv("vrate.csv")
+> rnt<-merge(vrate, temp, by="Year")
+> tnv<-merge(temp, visitors, by="Year")
+> rnt$Year<-(rnt$Year-1980)
+> tnv$Year<-(tnv$Year-1980)
+> time.rxt<-lm(Visit.Rate ~ Temp + Year, data=rnt)
+> summary(time.rxt)
+
+Call:
+lm(formula = Visit.Rate ~ Temp + Year, data = rnt)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-1.526e-03 -5.150e-04  3.369e-05  4.398e-04  1.951e-03 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 4.192e-03  4.365e-04   9.603 4.42e-11 ***
+Temp        1.297e-03  1.771e-03   0.732    0.469    
+Year        2.594e-04  3.104e-05   8.355 1.19e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0008474 on 33 degrees of freedom
+Multiple R-squared:  0.9278,    Adjusted R-squared:  0.9234 
+F-statistic: 212.1 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> time.vxt<-lm(Visitors ~ Temp + Year, data=tnv)
+> summary(time.vxt)
+
+Call:
+lm(formula = Visitors ~ Temp + Year, data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-12048100  -2485690   1187081   3352338  10047861 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 13053134    2773709   4.706 4.38e-05 ***
+Temp        11912814   11256463   1.058    0.298    
+Year         2231327     197266  11.311 6.78e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5384000 on 33 degrees of freedom
+Multiple R-squared:  0.9597,    Adjusted R-squared:  0.9572 
+F-statistic: 392.6 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> # I'm siwtching back to Visitors away from Vsit.Rate
+> exp.vxt<-lm(Visitors ~ exp(Temp), data=tnv)
+> ln.vxt<-lm(log(Visitors) ~ Temp, data=tnv)
+> summary(exp.vxt)
+
+Call:
+lm(formula = Visitors ~ exp(Temp), data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-29119315  -9179669   2225315   8036520  22099253 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -67653587   10857717  -6.231 4.33e-07 ***
+exp(Temp)    77314611    6589113  11.734 1.67e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 11760000 on 34 degrees of freedom
+Multiple R-squared:  0.802,     Adjusted R-squared:  0.7961 
+F-statistic: 137.7 on 1 and 34 DF,  p-value: 1.671e-13
+
+> summary(ln.vxt)
+
+Call:
+lm(formula = log(Visitors) ~ Temp, data = tnv)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.49943 -0.14108  0.04471  0.17124  0.44090 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  16.6553     0.1100  151.47  < 2e-16 ***
+Temp          2.3650     0.2197   10.77  1.7e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2399 on 34 degrees of freedom
+Multiple R-squared:  0.7732,    Adjusted R-squared:  0.7665 
+F-statistic: 115.9 on 1 and 34 DF,  p-value: 1.702e-12
+
+> 
+> # exp.vxt yeilds a higher r.squared, gives me workable p-values on all my
+> # coefficients, and more closely follows the model used by Grdic and Nizic.
+> # My only qualm is that the model itself makes little sense. When graphed
+> # it forms a right angle that hugs quadrant 3, and with a negative
+> # intercept estimate it always predicts negative tourist numbers.
+> 
+> # CONCLUSION: Thrown out time trend term and exponential model. Looking to 
+> #             forecast.
+> 
+> # Next I plan on looking into Vector Autoregression
+> # Vector Autoregression
+> # The plan now is to shift more towards forecasting in my model. After looking
+> # at how the time trend nullified the usefulness of my Temp term and how the
+> # exponential approach yeilded un-interpretable results I have begun thinking
+> # that prediction within the range of my data is useless anyways if we consider
+> # that the next years data and the years after that will exceed the bounds
+> # of my current data anyways. What does it matter if I can predict tourism
+> # in 1995 given temp data if we already have hard data on tourism in 1995?
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp<-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> tnv<-merge(temp, visitors, by="Year")
+> tnv$Year<-(tnv$Year-1980)
+> tnv$Temp1 = tnv$Temp
+> tnv$Temp2 = tnv$Temp
+> tnv$Visitors1 = tnv$Visitors
+> tnv$Visitors2 = tnv$Visitors
+> 
+> 
+> shift<-function(x, n){ c(x[-(seq(n))], rep(NA, n))}
+> tnv$Temp1 <- shift(tnv$Temp1, 1)
+> tnv$Temp2 <- shift(tnv$Temp2, 2)
+> tnv$Visitors1 <- shift(tnv$Visitors1, 1)
+> tnv$Visitors2 <- shift(tnv$Visitors2, 2)
+> vec1.vxt<-lm(Visitors ~ Visitors1 + Temp1, data=tnv)
+> summary(vec1.vxt)
+
+Call:
+lm(formula = Visitors ~ Visitors1 + Temp1, data = tnv)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-9953276 -1043130  -259250  1820416  6282036 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.428e+06  1.540e+06  -0.928    0.360    
+Visitors1    9.183e-01  4.868e-02  18.865   <2e-16 ***
+Temp1        7.967e+06  6.768e+06   1.177    0.248    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3267000 on 32 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.984,     Adjusted R-squared:  0.9829 
+F-statistic: 980.9 on 2 and 32 DF,  p-value: < 2.2e-16
+
+> vec2.vxt<-lm(Visitors ~ Visitors1 + Visitors2 + Temp1 + Temp2, data=tnv)
+> summary(vec2.vxt)
+
+Call:
+lm(formula = Visitors ~ Visitors1 + Visitors2 + Temp1 + Temp2, 
+    data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-11008765  -1083025   -108873   1833897   6128856 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -2.312e+06  1.642e+06  -1.408   0.1698    
+Visitors1    1.165e+00  1.721e-01   6.768 1.99e-07 ***
+Visitors2   -2.790e-01  1.747e-01  -1.597   0.1212    
+Temp1        1.520e+07  7.365e+06   2.064   0.0481 *  
+Temp2        5.418e+05  6.840e+06   0.079   0.9374    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3145000 on 29 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.9853,    Adjusted R-squared:  0.9832 
+F-statistic: 484.4 on 4 and 29 DF,  p-value: < 2.2e-16
+
+> 
+> # While both of these models give hefty r.squared, most of the coefficients
+> # and intercepts aren't signifigant. This does not help me much and there's 
+> # not much point in estimating the second equation when the first one doesn't
+> # help me already. 
+> # Given my lack of determining a decent model, I figured I'd look into some
+> # new data such as staewide sea-level or just raw statewide temperature.
+> 
+> # I have pulled Florida Statewide Average Temperature data from the Florida
+> # Climate Center and sea level data from the NOAA Center for Operational
+> # Oceanographic Products and Services. Their data comes from monitoring 
+> # stations around the state. I havee taken the average of each periods
+> # measurement across each of the stations to compute a staewide average.
+> # This is perhaps not the most accurate thing to do from an oceanographic
+> # perspective but I find it to be a good enough surrogate for my purposes.
+> # Their data also comes monthly, for the sake of simplicity I am using only
+> # those data points from the month of January, which I chose randomly.
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp<-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> slevel<-read.csv("slagg.csv")
+> avg.slevel<-data.frame(slevel$Year, slevel$Statewide.Average)
+> names(avg.slevel)[1]<-"Year"
+> names(avg.slevel)[2]<-"S.Level"
+> fl.temp<-read.csv("fltemp.csv")
+> tnv<-merge(temp, visitors, by="Year")
+> snv<-merge(slevel, visitors, by="Year")
+> fnv<-merge(fl.temp, visitors, by="Year")
+> snf<-merge(avg.slevel, fl.temp, by="Year")
+> all<-merge(snf, tnv, by="Year")
+> all$Year<-(all$Year-1980)
+> 
+> # Lets start with all the Simple Linear Ones
+> 
+> vxs<-lm(Visitors ~ S.Level, data=all)
+> summary(vxs)
+
+Call:
+lm(formula = Visitors ~ S.Level, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10411855  -3198069   1469799   3549824   9146550 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  44833318    1009377   44.42   <2e-16 ***
+S.Level     944153774   33780330   27.95   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5395000 on 34 degrees of freedom
+Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9571 
+F-statistic: 781.2 on 1 and 34 DF,  p-value: < 2.2e-16
+
+> # Good
+> time.vxs<-lm(Visitors ~ S.Level + Year, data=all)
+> summary(time.vxs)
+
+Call:
+lm(formula = Visitors ~ S.Level + Year, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10295936  -3219145   1434866   3509024   9078118 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)
+(Intercept)  4.760e+06  4.606e+08   0.010    0.992
+S.Level     -3.380e+08  1.474e+10  -0.023    0.982
+Year         3.285e+06  3.776e+07   0.087    0.931
+
+Residual standard error: 5475000 on 33 degrees of freedom
+Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9558 
+F-statistic: 379.2 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> # Out - Insignifigant Coeff
+> vxf<-lm(Visitors ~ Fl.Temp, data=all)
+> summary(vxf)
+
+Call:
+lm(formula = Visitors ~ Fl.Temp, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-41165581 -22153317  -6631723  23291232  43409489 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -585155612  322379864  -1.815   0.0783 .
+Fl.Temp        9055815    4541248   1.994   0.0542 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 24990000 on 34 degrees of freedom
+Multiple R-squared:  0.1047,    Adjusted R-squared:  0.07838 
+F-statistic: 3.977 on 1 and 34 DF,  p-value: 0.05421
+
+> # Out - Insignifigant Coeff
+> time.vxf<-lm(Visitors ~ Fl.Temp + Year, data=all)
+> summary(time.vxf)
+
+Call:
+lm(formula = Visitors ~ Fl.Temp + Year, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10327360  -3201513   1540073   3442119   9054826 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 21695579   74372074   0.292    0.772    
+Fl.Temp       -90424    1055097  -0.086    0.932    
+Year         2421675      93164  25.994   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5474000 on 33 degrees of freedom
+Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9558 
+F-statistic: 379.3 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> # Out - Insignifigant Coeff
+> vxt<-lm(Visitors ~ Temp, data=all)
+> summary(vxt)
+
+Call:
+lm(formula = Visitors ~ Temp, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-29910741  -9695709   1723416   7835171  20262407 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -1274916    5368703  -0.237    0.814    
+Temp        126379778   10724953  11.784 1.49e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 11710000 on 34 degrees of freedom
+Multiple R-squared:  0.8033,    Adjusted R-squared:  0.7975 
+F-statistic: 138.9 on 1 and 34 DF,  p-value: 1.487e-13
+
+> # Good Enough - Insignifigant Intercept
+> vxsf<-lm(Visitors ~ S.Level + Fl.Temp, data=all)
+> summary(vxsf)
+
+Call:
+lm(formula = Visitors ~ S.Level + Fl.Temp, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10412813  -3186127   1564229   3473393   9105953 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  51134540   74743609   0.684    0.499    
+S.Level     945176141   36365847  25.991   <2e-16 ***
+Fl.Temp        -88966    1055195  -0.084    0.933    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5475000 on 33 degrees of freedom
+Multiple R-squared:  0.9583,    Adjusted R-squared:  0.9558 
+F-statistic: 379.2 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> # Out - Insignifigant Coeff
+> vxst<-lm(Visitors ~ S.Level + Temp, data=all)
+> summary(vxst)
+
+Call:
+lm(formula = Visitors ~ S.Level + Temp, data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-12003436  -2495553   1177981   3283533  10099223 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  40249488    4422878   9.100 1.62e-10 ***
+S.Level     870526698   76953040  11.312 6.76e-13 ***
+Temp         11974612   11250440   1.064    0.295    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5384000 on 33 degrees of freedom
+Multiple R-squared:  0.9597,    Adjusted R-squared:  0.9572 
+F-statistic: 392.7 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> # Out - Insignifigant Coeff
+> 
+> # vxs is a good model. It has a high r.squared, it doesnt improve at all by
+> # adding a time term, both the intercept and the coefficient are signifigant,
+> # and the overall regression scores a very high f statistic. Ironically,
+> # this is the data set that underwent the most manipulation by me.
+> 
+> exp.vxf<-lm(Visitors ~ exp(Fl.Temp), data=all)
+> summary(exp.vxf)
+
+Call:
+lm(formula = Visitors ~ exp(Fl.Temp), data = all)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-36340093 -20133270  -8911301  25149339  43866943 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  5.190e+07  5.255e+06   9.877  1.6e-11 ***
+exp(Fl.Temp) 5.386e-25  2.956e-25   1.822   0.0772 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 25210000 on 34 degrees of freedom
+Multiple R-squared:  0.08898,   Adjusted R-squared:  0.06218 
+F-statistic: 3.321 on 1 and 34 DF,  p-value: 0.07722
+
+> # This was to follow Grdic and Nizic as closely as I can. Visitors regressed
+> # on air temps. Low r.squared and insignifigant coefficient. This is
+> # Out
+> # Lets look into using Sea Level to do Vector Autoregression
+> 
+> setwd("D:/Files/R Directory/Project")
+> visitors<-read.csv("visitors.csv")
+> slevel<-read.csv("slagg.csv")
+> avg.slevel<-data.frame(slevel$Year, slevel$Statewide.Average)
+> names(avg.slevel)[1]<-"Year"
+> names(avg.slevel)[2]<-"S.Level"
+> snv<-merge(avg.slevel, visitors, by="Year")
+> 
+> shift<-function(x, n){ c(x[-(seq(n))], rep(NA, n))}
+> 
+> snv$S.Level1 = snv$S.Level
+> snv$S.Level2 = snv$S.Level
+> snv$Visitors1 = snv$Visitors
+> snv$Visitors2 = snv$Visitors
+> snv$S.Level1 <-shift(snv$S.Level1, 1)
+> snv$S.Level2 <-shift(snv$S.Level2, 2)
+> snv$Visitors1 <-shift(snv$Visitors1, 1)
+> snv$Visitors2 <-shift(snv$Visitors2, 2)
+> 
+> vec1.vxs<-lm(Visitors ~ Visitors1 + S.Level1, data=snv)
+> summary(vec1.vxs)
+
+Call:
+lm(formula = Visitors ~ Visitors1 + S.Level1, data = snv)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-9510194 -1186883   417174  1202538  6613190 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 6.786e+06  4.632e+06   1.465    0.153    
+Visitors1   7.996e-01  1.030e-01   7.764 7.46e-09 ***
+S.Level1    1.693e+08  1.004e+08   1.686    0.102    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3198000 on 32 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.9846,    Adjusted R-squared:  0.9837 
+F-statistic:  1024 on 2 and 32 DF,  p-value: < 2.2e-16
+
+> vec2.vxs<-lm(Visitors ~ Visitors1 + Visitors2 + S.Level1 + S.Level2, data=snv)
+> summary(vec2.vxs)
+
+Call:
+lm(formula = Visitors ~ Visitors1 + Visitors2 + S.Level1 + S.Level2, 
+    data = snv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10988454  -1008462     96467   1287108   6994249 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  6.798e+06  1.478e+07   0.460    0.649    
+Visitors1    1.029e+00  1.764e-01   5.833 2.52e-06 ***
+Visitors2   -2.526e-01  1.742e-01  -1.450    0.158    
+S.Level1    -4.194e+08  5.467e+09  -0.077    0.939    
+S.Level2     6.229e+08  5.469e+09   0.114    0.910    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3184000 on 29 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.9849,    Adjusted R-squared:  0.9828 
+F-statistic: 472.4 on 4 and 29 DF,  p-value: < 2.2e-16
+
+> 
+> # These are all useless, full of insignifigant coefficients
+> # This is for various forms of transformation on VxS and some noodling with
+> # LVxT
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp <-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> slevel<-read.csv("slagg.csv")
+> avg.slevel<-data.frame(slevel$Year, slevel$Statewide.Average)
+> names(avg.slevel)[1]<-"Year"
+> names(avg.slevel)[2]<-"S.Level"
+> snv<-merge(avg.slevel, visitors, by="Year")
+> tnv <-merge(temp, visitors, by="Year")
+> tnv$Year<-(tnv$Year-1980)
+> 
+> time.lvxt<-lm(log(Visitors) ~ Temp + Year, data=tnv)
+> summary(time.lvxt)
+
+Call:
+lm(formula = log(Visitors) ~ Temp + Year, data = tnv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.137103 -0.095429 -0.008592  0.096398  0.229405 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 16.951970   0.054339 311.967  < 2e-16 ***
+Temp        -0.005054   0.220522  -0.023    0.982    
+Year         0.046200   0.003865  11.955 1.55e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1055 on 33 degrees of freedom
+Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9549 
+F-statistic: 371.3 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> 
+> # Again, adding a time term makes the Temp term completely irrelevant
+> 
+> lvxs<-lm(log(Visitors) ~ S.Level, data=snv)
+> vxls<-lm(Visitors ~ log(S.Level), data=snv)
+Warning message:
+In log(S.Level) : NaNs produced
+> lvxls<-lm(log(Visitors) ~ log(S.Level), data=snv)
+Warning message:
+In log(S.Level) : NaNs produced
+> summary(lvxs)
+
+Call:
+lm(formula = log(Visitors) ~ S.Level, data = snv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.137280 -0.095279 -0.007259  0.096510  0.230770 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 17.51364    0.01945  900.47   <2e-16 ***
+S.Level     18.00102    0.65091   27.66   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1039 on 34 degrees of freedom
+Multiple R-squared:  0.9574,    Adjusted R-squared:  0.9562 
+F-statistic: 764.8 on 1 and 34 DF,  p-value: < 2.2e-16
+
+> summary(vxls)
+
+Call:
+lm(formula = Visitors ~ log(S.Level), data = snv)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-14003536  -4657894   -199527   3079389  20015540 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  153374560    7404220   20.71 1.86e-15 ***
+log(S.Level)  21521307    1924138   11.19 2.63e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7778000 on 21 degrees of freedom
+  (13 observations deleted due to missingness)
+Multiple R-squared:  0.8563,    Adjusted R-squared:  0.8494 
+F-statistic: 125.1 on 1 and 21 DF,  p-value: 2.634e-10
+
+> summary(lvxls)
+
+Call:
+lm(formula = log(Visitors) ~ log(S.Level), data = snv)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.20145 -0.05549  0.01301  0.04907  0.28237 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  19.32758    0.10126  190.88  < 2e-16 ***
+log(S.Level)  0.33822    0.02631   12.85 2.03e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1064 on 21 degrees of freedom
+  (13 observations deleted due to missingness)
+Multiple R-squared:  0.8872,    Adjusted R-squared:  0.8819 
+F-statistic: 165.2 on 1 and 21 DF,  p-value: 2.031e-11
+
+> 
+> # Log(S.Level) is producings NaN's so I am uncomfortable in using it 
+> 
+> # LVxT and LVxS are both good models, however
+> # In order to deal with the problem of spurrious regression I would like to
+> # return to looking at Visit.Rate.
+> 
+> setwd("D:/Files/R Directory/Project")
+> temp<-read.csv("temp.csv")
+> visitors<-read.csv("visitors.csv")
+> vrate<-read.csv("vrate.csv")
+> plot(vrate)
+> 
+> # Visit.Rate still trends upwards, even after accounting for population growth
+> # Now I want to construct a data set that uses the Temp anomies frome earlier
+> # as a percent of florids annual average temperature
+> 
+> fl.temp<-read.csv("fltemp.csv")
+> tnf<-merge(temp, fl.temp, by="Year")
+> tnf$PCT<-(tnf$Temp/tnf$Fl.Temp)
+> rates<-merge(tnf, vrate, by="Year")
+> plot(rates$PCT)
+> rxp<-lm(Visit.Rate ~ PCT, data=rates)
+> summary(rxp)
+
+Call:
+lm(formula = Visit.Rate ~ PCT, data = rates)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.0034543 -0.0010028  0.0004321  0.0010598  0.0031019 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.0024333  0.0006806   3.575  0.00107 ** 
+PCT         1.0524372  0.0968344  10.868 1.33e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.001469 on 34 degrees of freedom
+Multiple R-squared:  0.7765,    Adjusted R-squared:  0.7699 
+F-statistic: 118.1 on 1 and 34 DF,  p-value: 1.325e-12
+
+> 
+> rates$Year<-(rates$Year-1980)
+> 
+> time.rxp<-lm(Visit.Rate ~ PCT + Year, data=rates)
+> summary(time.rxp)
+
+Call:
+lm(formula = Visit.Rate ~ PCT + Year, data = rates)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-1.516e-03 -5.100e-04  4.784e-05  4.334e-04  1.950e-03 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 4.179e-03  4.451e-04   9.390 7.65e-11 ***
+PCT         9.521e-02  1.279e-01   0.744    0.462    
+Year        2.590e-04  3.112e-05   8.321 1.30e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0008471 on 33 degrees of freedom
+Multiple R-squared:  0.9279,    Adjusted R-squared:  0.9235 
+F-statistic: 212.2 on 2 and 33 DF,  p-value: < 2.2e-16
+
+> 
+> # while RxP seems promising, adding a trend term negates the signifigance of
+> # PCT and brings me back to a spurrious regression.
+> 
